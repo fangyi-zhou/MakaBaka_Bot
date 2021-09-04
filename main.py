@@ -17,13 +17,22 @@ def start(update, context):
 
 
 def goodnight(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id,
-                             text="晚安玛卡巴卡")
+    context.bot.send_message(chat_id=update.effective_chat.id, text="晚安玛卡巴卡")
+
+
+def hughug(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text="抱抱玛卡巴卡")
+
 
 start_handler = CommandHandler("start", start)
-goodnight_handler = MessageHandler(Filters.regex("^晚安.*") |
-                                   Filters.regex(".*晚安$"), goodnight)
+goodnight_handler = MessageHandler(
+    Filters.regex("^晚安.*") | Filters.regex(".*晚安$"), goodnight
+)
+hughug_handler = MessageHandler(
+    Filters.regex("哭哭") | Filters.regex("呜呜") | Filters.regex("要抱抱"), hughug
+)
 dispatcher.add_handler(start_handler)
 dispatcher.add_handler(goodnight_handler)
+dispatcher.add_handler(hughug_handler)
 
 updater.start_polling()
