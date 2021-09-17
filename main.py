@@ -26,7 +26,6 @@ hughug_handler = MessageHandler(
     Filters.regex("哭哭") | Filters.regex("呜呜") | Filters.regex("要抱抱"),
     reply_text("抱抱玛卡巴卡"),
 )
-dispatcher.add_handler(start_handler)
 dispatcher.add_handler(goodnight_handler)
 dispatcher.add_handler(hughug_handler)
 
