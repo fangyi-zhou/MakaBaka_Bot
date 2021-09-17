@@ -12,24 +12,19 @@ logging.basicConfig(
 )
 
 
-def start(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text="玛卡巴卡")
+def reply_text(text):
+    def reply_func(update, context):
+        context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+
+    return reply_func
 
 
-def goodnight(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text="晚安玛卡巴卡")
-
-
-def hughug(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text="抱抱玛卡巴卡")
-
-
-start_handler = CommandHandler("start", start)
 goodnight_handler = MessageHandler(
-    Filters.regex("^晚安.*") | Filters.regex(".*晚安$"), goodnight
+    Filters.regex("^晚安.*") | Filters.regex(".*晚安$"), reply_text("晚安玛卡巴卡")
 )
 hughug_handler = MessageHandler(
-    Filters.regex("哭哭") | Filters.regex("呜呜") | Filters.regex("要抱抱"), hughug
+    Filters.regex("哭哭") | Filters.regex("呜呜") | Filters.regex("要抱抱"),
+    reply_text("抱抱玛卡巴卡"),
 )
 dispatcher.add_handler(start_handler)
 dispatcher.add_handler(goodnight_handler)
